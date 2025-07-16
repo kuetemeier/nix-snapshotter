@@ -2,7 +2,7 @@
   description = "Containerd snapshotter that understands nix store paths natively.";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-24.11";
+    nixpkgs.url = "nixpkgs/nixos-25.05";
     globset = {
       url = "github:pdtpartners/globset";
       inputs.nixpkgs-lib.follows = "nixpkgs";
@@ -17,9 +17,13 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "x86_64-linux" ];
-      imports = [ ./modules ];
+  outputs = inputs @ {
+    nixpkgs,
+    flake-parts,
+    ...
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = ["x86_64-linux"];
+      imports = [./modules];
     };
 }
